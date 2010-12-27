@@ -88,7 +88,10 @@ oneGeni.load = ( function () {
     data = d;
     
     for ( var id in data.nodes ) {
-      if ( id.indexOf( 'profile' ) > -1 ) add( data.nodes[ id ] );
+      if ( id.indexOf( 'profile' ) > -1 ) {
+        if ( id == data.focus.id ) add ( data.focus );
+        else add( data.nodes[ id ] );
+      }
     }
 
     for ( var id in data.nodes ) {
@@ -100,11 +103,25 @@ oneGeni.load = ( function () {
   
   function add ( person ) {
     var html = document.createElement( 'article' );
+    
+    var name = document.createElement( 'h1' );
+    name.innerHTML = person.first_name + ' ' 
+      + ( person.middle_name ? person.middle_name.substring( 0, 1 ) + '. ' : '' ) 
+      + person.last_name;
+    
+    var bday = document.createElement( 'h3' );
+    bday.innerHTML = person.birth_date ? '(' + person.birth_date.substr( -4, 4 ) + ')' : '';
+    
+    var img = document.createElement( 'img' );
+    img.src = 'img/' + person.gender + '_silhouette.png';
+    
     $( html )
       .attr( 'role', 'person' )
       .attr( 'id', person.id )
       .addClass( person.gender )
-      .text( person.first_name + ' ' + ( person.middle_name ? person.middle_name + ' ' : '' ) + person.last_name );
+      .append( img )
+      .append( name )
+      .append( bday );
       
     cont.append( html );
     data.nodes[ person.id ].elm = html;
