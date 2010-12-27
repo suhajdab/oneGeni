@@ -1,0 +1,139 @@
+{
+  "focus": {
+    "current_residence": "Malm\u00f6 Municipality, Sweden",
+    "language": "en-US",
+    "claimed": "true",
+    "birth_date": "11/2/1976",
+    "birth_location": "Budapest, Hungary",
+    "middle_name": "\u00c1kos",
+    "locked": "false",
+    "big_tree": "false",
+    "url": "https://www.geni.com/api/profile-3233920",
+    "last_name": "Suhajda",
+    "public": "false",
+    "gender": "male",
+    "first_name": "Bal\u00e1zs",
+    "created_by": "https://www.geni.com/api/profile-3233920",
+    "name": "Bal\u00e1zs Suhajda",
+    "id": "profile-3233920",
+    "guid": "6000000004082663298"
+  },
+  "nodes": {
+    "profile-3233940": {
+      "edges": {
+        "union-1934528": {
+          "rel": "partner"
+        },
+        "union-1934515": {
+          "rel": "partner"
+        },
+        "union-1934460": {
+          "rel": "child"
+        }
+      },
+      "middle_name": "Zolt\u00e1n",
+      "url": "https://www.geni.com/api/profile-3233940",
+      "public": "false",
+      "last_name": "Suhajda",
+      "gender": "male",
+      "first_name": "Alad\u00e1r",
+      "id": "profile-3233940"
+    },
+    "profile-3234120": {
+      "edges": {
+        "union-1934453": {
+          "rel": "partner"
+        },
+        "union-1934666": {
+          "rel": "child"
+        }
+      },
+      "middle_name": "",
+      "maiden_name": "Zsuzsanna Helyes",
+      "url": "https://www.geni.com/api/profile-3234120",
+      "public": "false",
+      "last_name": "Helyes",
+      "gender": "female",
+      "first_name": "Zsuzsanna",
+      "id": "profile-3234120"
+    },
+    "union-1934453": {
+      "edges": {
+        "profile-3234120": {
+          "rel": "partner"
+        },
+        "profile-3233920": {
+          "rel": "partner"
+        },
+        "profile-93286200": {
+          "rel": "child"
+        }
+      },
+      "status": "spouse"
+    },
+    "profile-3233920": {
+      "edges": {
+        "union-1934453": {
+          "rel": "partner"
+        },
+        "union-1934515": {
+          "rel": "child"
+        }
+      },
+      "middle_name": "\u00c1kos",
+      "url": "https://www.geni.com/api/profile-3233920",
+      "public": "false",
+      "last_name": "Suhajda",
+      "gender": "male",
+      "first_name": "Bal\u00e1zs",
+      "id": "profile-3233920"
+    },
+    "profile-93286200": {
+      "edges": {
+        "union-1934453": {
+          "rel": "child"
+        }
+      },
+      "url": "https://www.geni.com/api/profile-93286200",
+      "public": "false",
+      "last_name": "Suhajda",
+      "gender": "male",
+      "first_name": "M\u00e1rk",
+      "id": "profile-93286200"
+    },
+    "profile-3233935": {
+      "edges": {
+        "union-1934660": {
+          "rel": "child"
+        },
+        "union-1934514": {
+          "rel": "partner"
+        },
+        "union-1934515": {
+          "rel": "partner"
+        }
+      },
+      "middle_name": "Anna",
+      "url": "https://www.geni.com/api/profile-3233935",
+      "public": "false",
+      "last_name": "Tak\u00e1cs",
+      "gender": "female",
+      "first_name": "M\u00e1ria",
+      "id": "profile-3233935"
+    },
+    "union-1934515": {
+      "edges": {
+        "profile-3233940": {
+          "rel": "partner"
+        },
+        "profile-3233920": {
+          "rel": "child"
+        },
+        "profile-3233935": {
+          "rel": "partner"
+        }
+      },
+      "status": "ex_spouse"
+    }
+  }
+}

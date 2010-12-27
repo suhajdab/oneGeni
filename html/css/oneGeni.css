@@ -1,0 +1,101 @@
+/*	Resets	*/
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, q, small, strong, sub, sup, dl, dt, dd, ol, ul, li, 
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	font-weight: normal;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+article, aside, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, video, object {
+	display: block;
+}
+
+a img {border: 0;}
+
+
+
+/*	General	*/
+html, body {
+	height: 100%;
+	margin: 0;
+}
+body {
+	color: #333;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+section {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -30px 0 0 -110px;
+}
+
+article[role=person] {
+	position: absolute;
+	height: 60px;
+	width: 220px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 10px;
+	line-height: 60px;
+	text-align: center;
+	-webkit-box-shadow: 1px 1px 3px rgba( 0, 0, 0, 0.3 );
+	-webkit-transform: translate3d( 0, 0, 0 );
+	z-index: 5;
+}
+
+article[role=person].male {
+	background: #C1E1EC;
+	background-image: -webkit-gradient(
+		linear, 
+		left top, 
+		left bottom, 
+		from( 					 #C1E1EC ),
+		color-stop( 75%, #7AC0D7 ), 
+		to(   					 #7AC0D7 )
+	);
+	border-color: hsl( 195, 53%, 66% );
+}
+
+article[role=person].female {
+	background: #FFDCE2;
+	background-image: -webkit-gradient(
+		linear, 
+		left top,
+		left bottom,
+		from( 					 #FFDCE2 ), 
+		color-stop( 75%, #FFAEBB ),
+		to(   					 #FFAEBB )
+	);
+	border-color: hsl( 350, 100%, 75% );
+}
+
+article[role=person].male.focus {
+	background-image: -webkit-gradient(
+		radial,
+		0% 0%, 23, 
+		50% 50%, 140,
+		from( 					 #FFF ),
+		to(   					 #7AC0D7 )
+	);
+}
+
+article[role=person].female.focus {
+	background-image: -webkit-gradient(
+		radial,
+		0% 0%, 23, 
+		50% 50%, 140,
+		from( 					#FFF ), 
+		to(   					#FFAEBB )
+	);
+}
