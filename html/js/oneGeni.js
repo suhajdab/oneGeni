@@ -12,6 +12,7 @@ oneGeni.load = ( function () {
   var cont,
     data = {},
     elm = {},
+    center,
     iTouch;
   
   
@@ -33,6 +34,10 @@ oneGeni.load = ( function () {
       .attr( 'role', 'person' );
     elm.w = html.width();
     elm.h = html.height();
+    center = {
+      x: Math.floor( ( window.outerWidth - elm.w ) / 2 ),
+      y: Math.floor( ( window.outerHeight - elm.h ) / 2 )
+    }
     html.remove();
     
     // TEMP
@@ -55,8 +60,17 @@ oneGeni.load = ( function () {
     e.preventDeault();
   }
   
+  function cancelEvent () {
+    document.body.removeEventListener( iTouch ? 'touchmove' : 'mousemove', moveHandler );
+    document.body.removeEventListener( iTouch ? 'touchend' : 'mouseup', endHandler );
+  }
+  
   function startHandler ( e ) {
-    if ( iTouch && e.touches.length > 1 ) return;
+    if ( iTouch && e.touches.length > 1 ) {
+      cancel();
+      return;
+    }
+    
     start = {
  			x: iTouch ? e.touches[ 0 ].pageX : e.clientX,
  			y: iTouch ? e.touches[ 0 ].pageY : e.clientY
@@ -67,6 +81,7 @@ oneGeni.load = ( function () {
   }
   
   function moveHandler ( e ) {
+    
     e.preventDefault();
     
 		delta.x = ( iTouch ? e.touches[ 0 ].pageX : e.clientX ) - start.x;
@@ -78,12 +93,11 @@ oneGeni.load = ( function () {
   function endHandler ( e ) {
     pos.x += delta.x;
     pos.y += delta.y;
-    
-    document.body.removeEventListener( iTouch ? 'touchmove' : 'mousemove', moveHandler );
-    document.body.removeEventListener( iTouch ? 'touchend' : 'mouseup', endHandler );
+    cancel();
   }
   
   function parse ( d ) {
+    if ( !d ) return;
 
     data = d;
     
@@ -99,6 +113,7 @@ oneGeni.load = ( function () {
     }
     
     data.focus.elm = $( '#' + data.focus.id ).addClass( 'focus' );
+    position ( data.focus.elm.dom[ 0 ] );
   }
   
   function add ( person ) {
@@ -170,8 +185,14 @@ oneGeni.load = ( function () {
       if ( edges[ id ].rel == 'partner' ) $( data.nodes[ id ].elm ).addClass( union.status );
       else if ( edges[ id ].rel == 'child' ) $( data.nodes[ id ].elm ).addClass( 'child' );
       
-      data.nodes[ id ].elm.style.webkitTransform = 'translate(' + x + 'px, ' + y + 'px)';
+      position ( data.nodes[ id ].elm, { x: x, y: y });
     }
+  }
+  
+  function position ( elm, pos ) {
+    if ( !elm ) return;
+    if ( !pos ) var pos = { x: 0, y: 0 };
+    elm.style.webkitTransform = 'translate(' + ( center.x + pos.x ) + 'px, ' + ( center.y + pos.y ) + 'px)';
   }
   
   window.addEventListener( 'load', init );
