@@ -51,9 +51,13 @@ article[role=person] {
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 10px;
-	-webkit-box-shadow: 1px 1px 3px rgba( 0, 0, 0, 0.3 );
+/*	-webkit-box-shadow: 1px 1px 3px rgba( 0, 0, 0, 0.4 );*/
 	-webkit-transform: translate3d( 0, 0, 0 );
 	z-index: 5;
+}
+
+article[role=person]:hover {
+	-webkit-box-shadow: 3px 3px 5px rgba( 0, 0, 0, 0.3 );
 }
 
 article[role=person].male {
@@ -67,6 +71,7 @@ article[role=person].male {
 		to(   					 #7AC0D7 )
 	);
 	border-color: hsl( 195, 53%, 66% );
+	text-shadow: #C1E1EC 0px 1px 1px;
 }
 
 article[role=person].female {
@@ -80,14 +85,15 @@ article[role=person].female {
 		to(   					 #FFAEBB )
 	);
 	border-color: hsl( 350, 100%, 75% );
+	text-shadow: #FFDCE2 0px 1px 1px;
 }
 
 article[role=person].male.focus {
 	background-image: -webkit-gradient(
 		radial,
-		0% 0%, 23, 
-		50% 50%, 140,
-		from( 					 #FFF ),
+		50% -380%, 200, 
+		50% -380%, 206,
+		from( 					 #C1E1EC ),
 		to(   					 #7AC0D7 )
 	);
 }
@@ -95,9 +101,9 @@ article[role=person].male.focus {
 article[role=person].female.focus {
 	background-image: -webkit-gradient(
 		radial,
-		0% 0%, 23, 
-		50% 50%, 140,
-		from( 					#FFF ), 
+		50% -380%, 200, 
+		50% -380%, 206,
+		from( 					#FFDCE2 ), 
 		to(   					#FFAEBB )
 	);
 }

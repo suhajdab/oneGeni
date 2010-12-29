@@ -1,13 +1,13 @@
 body {
-	font-size: 80%;
+/*	font-size: 80%;*/
 }
 
 article[role=person] {
-	height: 40px;
-	width: 160px;
+/*	height: 40px;
+	width: 160px;*/
 }
 
 article[role=person] h1,
 article[role=person] h3 {
-	margin: 4px;
+/*	margin: 4px;*/
 }
