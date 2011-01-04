@@ -1,0 +1,4 @@
+Mobile interface to geni.com
+
+The site uses flash to view the familytree, which makes it unavailable on many mobile devices.
+This is an attempt to create a mobile interface taking advantage of the relatively new geni API.
