@@ -1,5 +1,7 @@
 <?php
 
+	include_once ('inc/config.php');
+
 	//if ( $_GET['test'] == 'true') {
 		header('location: https://www.geni.com/oauth/authorize');
 		die();
@@ -8,9 +10,7 @@
 	// 	include_once "oauth-php/library/OAuthRequester.php";
 	// 
 	// 	// Test of the OAuthStore2Leg 
-	// 
-	// 	$key = 'lSxTsgAD7TY6A2hHWvQD09GBCtkigPRrhm9KNXFo'; // fill with your public key 
-	// 	$secret = '7E8smtZOGxO426egYjvFoQZVHsNASpa506xViFuy'; // fill with your secret key
+
 	// 	$url = "https://www.geni.com/oauth/authorize"; // fill with the url for the oauth service
 	// 
 	// 	$options = array('consumer_key' => $key, 'consumer_secret' => $secret);
