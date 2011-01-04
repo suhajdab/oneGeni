@@ -26,6 +26,7 @@ oneGeni.people = ( function ( $ ) {
     that.data.children = [];
     that.data.parents = [];
     that.data.partners = [];
+    that.data.siblings = [];
     
     var html = document.createElement( 'article' );
 
@@ -71,6 +72,15 @@ oneGeni.people = ( function ( $ ) {
       else if ( c instanceof Array ) 
         that.data.children = c;
     },
+
+    siblings: function ( s ) {
+      var that = this;
+      if ( !s ) return that.data.siblings;
+      if ( typeof s == 'string' && !that.data.siblings.contains( s ) ) 
+        that.data.siblings.push( s );
+      else if ( s instanceof Array ) 
+        that.data.siblings = s;
+    },
     
     parents: function ( p ) {
       var that = this;
@@ -96,25 +106,59 @@ oneGeni.people = ( function ( $ ) {
       else {
         that.pos = pos;
         that.elm.style.webkitTransitionDuration = animate ? '1s' : 0;
-        that.elm.style.webkitTransform = 'translate3d(' + ( center.x + pos.x ) + 'px,' + ( center.y + pos.y ) + 'px,0)';
+        that.elm.style.webkitTransform = 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)';
       }
     },
     
     init: function () {
       //  position immidiate family
       var that = this,
+        male = that.data.gender == 'male',
         y, x, l, w;
       if ( this.data.id == focusId ) {
-        that.position({ x: 0, y: 0 });
+        that.position({ x: center.x, y: center.y });
       }
       //  position children
-      y = elm.h + margin;
+      y = that.pos.y + ( elm.h + margin );
       l = that.data.children.length;
       w = l * ( elm.w + margin );
-      var mid = l / 2  + ( that.data.gender == 'male' ? 0 : 1 );
+      var offset = ( male ? 0 : 1 );
       for ( var i = 0; i < l; i++ ) {
-        x = that.pos.x - w / 2 + ( mid - i ) * ( elm.w + margin );
-        people[ that.data.children[ i ] ].position({ x: x, y: y });
+        var child = people[ that.data.children[ i ] ];
+        if ( !!child.position() ) continue;
+        x = that.pos.x - w / 2 + ( i + offset ) * ( elm.w + margin );
+        child.position({ x: x, y: y });
+      }
+      
+      //  position parents
+      y = that.pos.y - ( elm.h + margin );
+      var parent1 = people[ that.data.parents[ 0 ] ];
+      var parent2 = people[ that.data.parents[ 1 ] ];
+      parent1.position({
+        x: that.pos.x + ( elm.w + margin ) / ( parent1.data.gender == 'male' ? 2 : -2 ),
+        y: y
+      })
+      parent2.position({
+        x: that.pos.x + ( elm.w + margin ) / ( parent2.data.gender == 'male' ? 2 : -2 ),
+        y: y
+      });
+      
+      //  position partners
+      y = that.pos.y;
+      l = that.data.partners.length;
+      if ( l > 0 )
+      for ( var i = 0; i < l; i++ ) {
+        x = that.pos.x + ( i + 1 ) * ( elm.w + margin ) * ( male ? -1 : 1 );
+        var id = that.data.partners[ i ].split( ':' )[ 0 ];
+        people[ id ].position({ x: x, y: y });
+      }
+
+      //  position siblings
+      y = that.pos.y;
+      l = that.data.siblings.length;
+      for ( var i = 0; i < l; i++ ) {
+        x = that.pos.x + ( i + 1 ) * ( elm.w + margin ) * ( male ? 1 : -1 );
+        people[ that.data.siblings[ i ]].position({ x: x, y: y });
       }
     },
     
@@ -154,7 +198,14 @@ oneGeni.people = ( function ( $ ) {
     });
     
     document.body.addEventListener( iTouch ? 'touchstart' : 'mousedown', startHandler, false );
+    cont.bind( iTouch ? 'doubleTap' : 'dblclick', handleDTap );
     //window.addEventListener( 'touchmove', prevent, false );
+  }
+  
+  function handleDTap ( e ) {
+    var el = $( e.target.id );
+    if ( !el.is( 'article' ) ) el = el.parents( 'article' );
+    console.log( el );
   }
   
   function prevent ( e ) {
@@ -238,6 +289,7 @@ oneGeni.people = ( function ( $ ) {
         if ( edges[ id ].rel == 'partner' && edges[ id2 ].rel == 'child' ) people[ id ].children( id2 );
         if ( edges[ id ].rel == 'child' && edges[ id2 ].rel == 'partner' ) people[ id ].parents( id2 );        
         if ( edges[ id ].rel == 'partner' && edges[ id2 ].rel == 'partner' ) people[ id ].partners( id2, union.status );
+        if ( edges[ id ].rel == 'child' && edges[ id2 ].rel == 'child' ) people[ id ].siblings( id2 );
       }
     }
     
