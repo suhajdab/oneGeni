@@ -185,27 +185,27 @@ oneGeni.people = ( function ( $ ) {
     }
     html.remove();
     
-    // TEMP
-    var tm = 3233935,
-      sa = 3233940,
-      hz = 3234120,
-      sb = 3233920
-    
-    $.ajax({
-      url: 'dev/profile-' + sb + '.json',
-      dataType: 'json',
-      success: parse
-    });
-    
     document.body.addEventListener( iTouch ? 'touchstart' : 'mousedown', startHandler, false );
-    cont.bind( iTouch ? 'doubleTap' : 'dblclick', handleDTap );
+    cont.delegate( 'article', iTouch ? 'doubleTap' : 'dblclick', handleDTap );
     //window.addEventListener( 'touchmove', prevent, false );
+    
+    // TEMP
+    var tm = 'profile-3233935',
+      sa = 'profile-3233940',
+      hz = 'profile-3234120',
+      sb = 'profile-3233920';
+      
+    loadProfile( sb, parse );
+  }
+  
+  function reset () {
+    people = {};
+    cont.html('');
+    focusId = false;
   }
   
   function handleDTap ( e ) {
-    var el = $( e.target.id );
-    if ( !el.is( 'article' ) ) el = el.parents( 'article' );
-    console.log( el );
+    loadProfile( this.id, parse );
   }
   
   function prevent ( e ) {
@@ -251,8 +251,23 @@ oneGeni.people = ( function ( $ ) {
     pos.y += delta.y;
   }
   
+  function loadProfile ( id, callback ) {
+
+    $.ajax({
+      url: 'dev/' + id + '.json',
+      dataType: 'json',
+      success: callback,
+      error: error
+    });
+  }
+  
+  function error ( err ) {
+    alert( err );
+  }
+  
   function parse ( d ) {
     if ( !d ) return;
+    reset();
 
     data = d;
     
