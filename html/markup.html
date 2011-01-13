@@ -12,10 +12,30 @@
 		<link rel="stylesheet" media="all and (max-width: 760px)" href="css/small.css" />
 	</head>
 	<body>
+		<script type="text/html" id="profile_tmpl">
+		  <article role="person" id="{=id}" class="{=gender}">
+				<img src="img/{=gender}_silhouette.png">
+				<h1>{=name}</h1>
+				<h3>{=lived}</h3>
+			</article>
+		</script>
 		
 		<section></section>
 		<script type="text/javascript" src="js/util.js"></script>
 		<script type="text/javascript" src="js/zepto.js"></script>
-		<script type="text/javascript" src="js/oneGeni.people.js"></script>
+		<script type="text/javascript" src="js/oneGeni.ui.js"></script>
+		<script type="text/javascript" src="js/oneGeni.load.js"></script>
+		<script type="text/javascript" src="js/oneGeni.tmpl.js"></script>
+		<script type="text/javascript" src="js/oneGeni.profiles.js"></script>
+		<script type="text/javascript" src="js/oneGeni.unions.js"></script>
+		<script type="text/javascript" src="js/oneGeni.position.js"></script>
+		<script type="text/javascript">
+			var tm = 'profile-3233935',
+	      sa = 'profile-3233940',
+	      hz = 'profile-3234120',
+	      sb = 'profile-3233920';
+
+	    oneGeni.load ( sb );
+		</script>
 	</body>
 </html>

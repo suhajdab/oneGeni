@@ -125,3 +125,14 @@ article[role=person] img {
 	margin: 3% 4%;
 	opacity: 0.4;
 }
+
+
+div[role=relation] {
+	position: absolute;
+	background: #333;
+	overflow: hidden;
+}
+
+div[role=relation].horizontal {
+	height: 1px;
+}

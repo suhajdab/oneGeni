@@ -4,3 +4,8 @@ Array.prototype.contains = function( v ) {
   }
   return false;
 }
+
+//  TODO: proper error logging
+function log ( m ) {
+  alert( m );
+}
